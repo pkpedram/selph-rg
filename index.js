@@ -5,6 +5,7 @@ const rg = async (config = Object) => {
 
         let template = 
 `
+const usersController = require("../controllers/user")
 ${config.modules.map(mdl => `\nconst ${mdl.name}Controller = require("../controllers/${mdl.name.charAt(0).toUpperCase() + mdl.name.slice(1)}")`).join('')}
 
 let routes = [
@@ -18,19 +19,19 @@ let routes = [
         route: '/register',
         type: 'post',
         middlewares: usersController['postBasic']['middlewares'],
-        controler: usersController.postBasic.controller
+        controller: usersController.postBasic.controller
     },
     {
         route: '/login',
         type: 'post',
         middlewares: usersController['login']['middlewares'],
-        controler: usersController['login']['controller']
+        controller: usersController['login']['controller']
     },
     {
         route: '/login/admin',
         type: 'post',
         middlewares: usersController['loginAdmin']['middlewares'],
-        controler: usersController['loginAdmin']['controller']
+        controller: usersController['loginAdmin']['controller']
     },
     ${
      config.modules.map(mdl => 
